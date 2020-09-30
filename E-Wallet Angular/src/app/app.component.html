@@ -1,0 +1,81 @@
+
+
+<div *ngIf="token==null && flag==false" style="width: 455px; margin: 0 auto;" class="mt-5"> 
+  <div *ngIf="msg!=undefined" class="alert alert-danger">{{msg}}</div> 
+
+  <div class="card-header">
+    <h3 class="text-center white">Account Login</h3>
+  </div>
+  <form #frm="ngForm" (ngSubmit)="login()">
+    <div class="input-group form-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text shadow"></span>
+      </div>
+      <input type="text" name="userid" required [(ngModel)]="userid" #mcustomerId="ngModel" class="form-control" placeholder="username">
+    </div>
+  
+
+    <div class="input-group form-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text shadow"></span>
+      </div>
+      <input type="password" name="userPassword" required [(ngModel)]="password" #mpassword="ngModel" class="form-control" placeholder="password">
+    </div>
+
+    <div >
+      <a style="color: #FFC312;" routerLink="adduser" (click)="toggle()">New User</a>
+    </div>
+
+    <br>
+
+    <div class="form-group">
+      <input type="submit" value="Login" routerLink="home" [disabled]="!frm.valid" class="btn shadow float-right login_btn">
+    </div>
+
+</form>
+</div>
+<div   class="col-md-4 mx-auto" *ngIf="token==null">
+  <div *ngIf="flag==true">
+    <router-outlet></router-outlet>
+    <div class="mt-2 text-center">
+      <button class="btn btn-danger" routerLink="" (click)="toggle()">Back to login page</button>
+    </div>
+   
+</div>
+</div>
+
+<div *ngIf="token!=null" class="mt-5">
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        
+      </a>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-item nav-link" routerLink="/home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-item nav-link" routerLink="addmoney">Add Money</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-item nav-link" routerLink="transferfund">Transfer Money</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-item nav-link" routerLink="viewbalance"> User Balance</a>
+            </li>
+          <li>
+            <a class="nav-item nav-link" routerLink="/home">Hello {{userName}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-item nav-link" routerLink="" (click)="logout()">LogOut</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+ 
+  <router-outlet></router-outlet>
+</div>
+
+

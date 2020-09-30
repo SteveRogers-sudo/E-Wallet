@@ -1,0 +1,60 @@
+
+<div style="margin-top: 100px; margin-bottom: 50px;">
+  <h2 class="text-center">Add User</h2>
+  <hr width="120">
+  <br>
+  
+    <div name="msg" class="alert alert-success" *ngIf="msg !=undefined">{{msg}}</div>
+    <div name="errMsg" class="alert alert-danger" *ngIf="errorMsg !=undefined">{{errorMsg}}</div>
+
+  <div style="width: 455px; margin: 0 auto;">
+    <form #frm="ngForm" (ngSubmit)="addUser()">
+        <div style="width:100%"><input type="text" class="form-control" required [(ngModel)]="userForm.userName" name="name" #musername="ngModel" pattern= "[A-Z][a-zA-Z ]*"placeholder="User Name "/>
+          <div class="alert alert-danger" *ngIf="musername.invalid && musername.touched">
+            <div *ngIf="musername.errors.required" style="color: red;"> * User Name is required</div>
+            <div *ngIf="musername.errors.pattern" style="color: red;"> User name should not contain digits and first alphabet should be capital.</div>
+          </div>
+        </div>
+        <br>
+        <div ngModelGroup="passwordGroup">
+          <div style="width:100% "><input type="text"  class="form-control" required [(ngModel)]="userForm.password" name="password" #mpassword="ngModel" placeholder="PassWord"/>
+              <div class="alert alert-danger" *ngIf="mpassword.invalid && mpassword.touched">
+                 <div *ngIf="mpassword.errors.required" style="color: red;"> * Password is required</div>
+              <!-- <div *ngIf="mpassword.errors?.notEqual" style="color: red;"> * Password and Confirm Password are not equal.</div> -->
+              </div>
+          </div>
+        <br>
+        
+            <div style="width:100% "><input type="text" appConfirmEqualValidator="password"  class="form-control" required [(ngModel)]="cpassword" name="cppassword" #mcpassword="ngModel" placeholder="Confirm-PassWord"/>
+                <div class="alert alert-danger" *ngIf="mcpassword.invalid && mcpassword.touched">
+                   <div *ngIf="mcpassword.errors.required" style="color: red;"> * Confirm Password is required</div>
+                   <div *ngIf="mcpassword.errors?.notEqual" style="color: red;"> * Password and Confirm Password are not equal.</div>
+                </div>
+            </div>
+      </div>
+        <br>
+        <div style="width:100%"><input type="text" class="form-control" required [(ngModel)]="userForm.userContact" name="userContact" #mcontact="ngModel" placeholder="Contact Number" pattern="[1-9][0-9]*" minlength="10" maxlength="10"/>
+          <div class="alert alert-danger" *ngIf="mcontact.invalid && mcontact.touched">
+            <div *ngIf="mcontact.errors.required" style="color: red;"> * Contact number is required</div>
+            <div *ngIf="mcontact.errors.pattern" style="color: red;"> * Contact number should have digits only.</div>
+            <div *ngIf="mcontact.errors.minlength" style="color: red;"> * 10 digits are required.</div>
+          </div>
+        </div>
+        <br>
+        <div style="width:100%"><input type="email" class="form-control" required [(ngModel)]="userForm.userEmail" name="email" #memail="ngModel" placeholder="E-mail" pattern="[a-z0-9._%+-]*[@][a-z]*[.][a-z]{2,4}"/>
+          <div class="alert alert-danger" *ngIf="memail.invalid && memail.touched">
+            <div *ngIf="memail.errors.required" style="color: red;"> * E-Mail is required</div>
+            <div *ngIf="memail.errors.pattern" style="color: red;"> Invalid email pattern.</div>
+            </div>
+        </div>
+        <br>
+        <div style="width:100%"><input type="date"  class="form-control" required [(ngModel)]="userForm.userDob" name="userdob" placeholder="yyyy-M-d" [max]="getToday()"/></div>
+
+        <br>
+        <br>
+
+        <div class="mt-2 text-center"><input type="Submit" value="Add User" [disabled]="!frm.valid" class="btn btn-warning mt-2 text-center"/></div>
+    </form>
+  </div>
+</div>
+

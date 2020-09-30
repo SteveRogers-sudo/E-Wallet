@@ -1,0 +1,33 @@
+<p>
+  
+</p>
+
+<div style="margin-top: 100px; margin-bottom: 50px;">
+  <h2 class="text-center">Transfer Fund</h2>
+  <hr width="120">
+  <br>
+
+  <div name="msg" class="alert alert-success" *ngIf="msg !=undefined">{{msg}}</div>
+  <div name="errMsg" class="alert alert-danger" *ngIf="errorMsg !=undefined">{{errorMsg}}</div>
+
+  <div style="width: 455px; margin: 0 auto;">
+    <form #frm="ngForm" (ngSubmit)="transferfund()">
+     
+      <br>
+      <div style="width:100%"><input type="text" class="form-control" required [(ngModel)]="transactionForm.toUserId" name="tuserId" #tuserId="ngModel" placeholder="To user Id "/>
+        <div class="alert alert-danger" *ngIf="tuserId.invalid && tuserId.touched">
+          <div *ngIf="tuserId.errors.required" style="color: red;"> * To User Id is required</div>
+        </div>
+      </div>
+      <br>
+      <div style="width:100%"><input type="number" class="form-control" required [(ngModel)]="transactionForm.amount" name="amount" #amount="ngModel" placeholder="Amount "/>
+        <div class="alert alert-danger" *ngIf="amount.invalid && amount.touched">
+          <div *ngIf="amount.errors.required" style="color: red;"> * Amount is required</div>
+        </div>
+      </div>
+      <br>
+      <div class="mt-2 text-center"><input type="Submit" value="Send  " [disabled]="!frm.valid" class="btn btn-warning mt-2 text-center"/></div>
+    </form>
+  </div>
+</div>
+

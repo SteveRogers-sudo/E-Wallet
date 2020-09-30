@@ -1,0 +1,42 @@
+<p>
+  
+</p>
+
+<div style="margin-top: 100px; margin-bottom: 50px;">
+  <h2 class="text-center">Add Money</h2>
+  <hr width="120">
+  <br>
+
+  <div name="msg" class="alert alert-success" *ngIf="msg !=undefined">{{msg}}</div>
+  <div name="errMsg" class="alert alert-danger" *ngIf="errorMsg !=undefined">{{errorMsg}}</div>
+
+  <div style="width: 455px; margin: 0 auto;">
+    <form #frm="ngForm" (ngSubmit)="addMoney()">
+      <div style="width:100%"><input type="number" class="form-control" required [(ngModel)]="addMoneyForm.accountNumber" name="accnum" #accnum="ngModel" placeholder="Account Number "/>
+        <div class="alert alert-danger" *ngIf="accnum.invalid && accnum.touched">
+          <div *ngIf="accnum.errors.required" style="color: red;"> * Account Number is required</div>
+        </div>
+      </div>
+      <br>
+      <div style="width:100%"><input type="number" class="form-control" required [(ngModel)]="addMoneyForm.amount" name="amount" #amount="ngModel" placeholder="Amount "/>
+        <div class="alert alert-danger" *ngIf="amount.invalid && amount.touched">
+          <div *ngIf="amount.errors.required" style="color: red;"> * Amount is required</div>
+        </div>
+      </div>
+      <br>
+      <div style="width:100%"><input type="text" class="form-control" required [(ngModel)]="addMoneyForm.accountHolderName" name="accholder" #accholder="ngModel" placeholder="Account Holder Name "/>
+        <div class="alert alert-danger" *ngIf="accholder.invalid && accholder.touched">
+          <div *ngIf="accholder.errors.required" style="color: red;"> * Account Holder Name is required</div>
+        </div>
+      </div>
+      <br>
+      <div style="width:100%"><input type="number" class="form-control" required [(ngModel)]="addMoneyForm.accountPin" name="pin" #pin="ngModel" placeholder="PIN "/>
+        <div class="alert alert-danger" *ngIf="pin.invalid && pin.touched">
+          <div *ngIf="pin.errors.required" style="color: red;"> * Account Holder Name is required</div>
+        </div>
+      </div>
+      <br>
+      <div class="mt-2 text-center"><input type="Submit" value="Add Money" [disabled]="!frm.valid" class="btn btn-warning mt-2 text-center"/></div>
+    </form>
+  </div>
+</div>
